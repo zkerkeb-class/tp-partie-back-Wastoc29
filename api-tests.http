@@ -1,0 +1,90 @@
+### API Pokemon - Tests
+### Utilisez l'extension REST Client dans VS Code pour tester ces endpoints
+
+@baseUrl = http://localhost:3000/api
+
+### 1. GET - Récupérer tous les pokemons (page 1)
+GET {{baseUrl}}/pokemons?page=1
+
+### 2. GET - Récupérer page 2
+GET {{baseUrl}}/pokemons?page=2
+
+### 3. GET - Rechercher Pikachu
+GET {{baseUrl}}/pokemons/search?name=pikachu
+
+### 4. GET - Rechercher Bulbasaur
+GET {{baseUrl}}/pokemons/search?name=bulbasaur
+
+### 5. GET - Pokemon par ID (Bulbasaur)
+GET {{baseUrl}}/pokemons/1
+
+### 6. GET - Pokemon par ID (Pikachu)
+GET {{baseUrl}}/pokemons/25
+
+### 7. POST - Créer un nouveau pokemon
+POST {{baseUrl}}/pokemons
+Content-Type: application/json
+
+{
+  "name": {
+    "english": "Testmon",
+    "japanese": "テストモン",
+    "chinese": "测试兽",
+    "french": "Testmon"
+  },
+  "type": ["Normal", "Flying"],
+  "base": {
+    "HP": 100,
+    "Attack": 120,
+    "Defense": 80,
+    "SpecialAttack": 110,
+    "SpecialDefense": 90,
+    "Speed": 95
+  },
+  "image": "http://localhost:3000/assets/pokemons/999.png"
+}
+
+### 8. PUT - Modifier complètement un pokemon (ID 1)
+PUT {{baseUrl}}/pokemons/1
+Content-Type: application/json
+
+{
+  "name": {
+    "english": "Super Bulbasaur",
+    "japanese": "スーパーフシギダネ",
+    "chinese": "超级妙蛙种子",
+    "french": "Super Bulbizarre"
+  },
+  "type": ["Grass", "Poison", "Dragon"],
+  "base": {
+    "HP": 150,
+    "Attack": 100,
+    "Defense": 100,
+    "SpecialAttack": 150,
+    "SpecialDefense": 150,
+    "Speed": 100
+  },
+  "image": "http://localhost:3000/assets/pokemons/1.png"
+}
+
+### 9. PATCH - Modifier partiellement un pokemon (juste HP)
+PATCH {{baseUrl}}/pokemons/1
+Content-Type: application/json
+
+{
+  "base": {
+    "HP": 200
+  }
+}
+
+### 10. DELETE - Supprimer un pokemon (ID 999)
+DELETE {{baseUrl}}/pokemons/999
+
+### 11. GET - Vérifier la racine de l'API
+GET http://localhost:3000/
+
+### 12. GET - Test 404 (Pokemon inexistant)
+GET {{baseUrl}}/pokemons/99999
+
+### 13. GET - Test recherche sans résultat
+GET {{baseUrl}}/pokemons/search?name=nonexistant
